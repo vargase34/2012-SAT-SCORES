@@ -1,0 +1,70 @@
+<!--mission: use the JSON from the 2012 NYC SAT Scores to return that schools info-->
+<!--By Emmanuel V, Bryan M, Tahara B, Mensur M-->
+<!DOCTYPE html>
+<html>
+​
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--below is bootstrap for our basic styling needs-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>2012 NYC SAT Scores</title>
+</head>
+​
+
+<body id='body'>
+    <!--" app" is used to activate vue on this div. this will be used on the whole body-->
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="home.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="about.html">About</a>
+            </li>
+        </ul>
+    </nav>
+    ​
+    <div class="container" id="app">
+        <div class="py-3" align="right">
+            <a href="https://www.schools.nyc.gov/">
+                <img src="nyclogo.png" alt="NYC-DOE Logo">
+            </a>
+        </div>
+        <!--row fluid is used to divide each section so that theres nothing overlapping eachother-->
+        <!--this div below will have the input and text field to search for schools in NYC-->
+        <div class="row-fluid text-center">
+            <h2>2012 NYC SAT Scores</h2>
+            <h5>Select a NYC high school</h5>
+            <!--give this input a text field and a drop down menu also known as datalist-->
+            <input list="school_names" type="text" id="user_input">
+            <!--the drop down menu is a list of all schools in the json-->
+            <datalist id="school_names">
+                <!--"v-for" is a for loop to cycle through all arrays and extract the element "school_name"-->
+                <option v-for="school_list in array_schools">{{ school_list.school_name }}</option>
+            </datalist>
+            <!--below makes a button that the user clicks on and activates the event save_school_name in the js-->
+            <input type="submit" v-on:click="save_school_name">
+        </div>
+        <!--below has the vue objects that the js found after clicking the submit button from earlier code-->
+        <div class="row-fluid mt-5 text-center">
+            <p>{{ specific_school.dbn }}</p>
+            <p>{{ specific_school.num_of_sat_test_takers }}</p>
+            <p>{{ specific_school.sat_critical_reading_avg_score }}</p>
+            <p>{{ specific_school.sat_math_avg_score }}</p>
+            <p>{{ specific_school.sat_writing_avg_score }}</p>
+        </div>
+    </div>
+    <button onclick="change_light()" class="fixed-bottom">Change the lights!</button>
+    <!--code below is used to activate vue-->
+    <script src="https://unpkg.com/vue"></script>
+    <!--code below used to activate ajax to get the API-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!--code below used to connect this HTML to the Javascript-->
+    <script src="main.js"></script>
+    ​
+</body>
+​
+
+</html>
